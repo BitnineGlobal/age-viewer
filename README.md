@@ -99,6 +99,23 @@ To Connect to postgreSQL server running from Docker Container
 > The following field is same as used to make the docker container specified above as flags.
 
 
+# AGE-Viewer setup on RHEL 8 with Binary
+
+## Install nodejs and module
+``` sudo dnf module install nodejs:14 ```
+
+``` npm install --omit=dev ```
+
+``` sudo npm install -g pm2 ```
+
+## Start Server
+
+```pm2 start ecosystem.config.js```
+
+In Browseer you can access the age-viewer
+[http://localhost:3001](http://localhost:3001)
+
+
 
 # License
 

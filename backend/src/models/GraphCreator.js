@@ -93,15 +93,23 @@ class GraphCreator {
     async parseData(){
         this.createGraph(this.dropGraph);
 
+        // Default to empty arrays if files are not provided
+        this.nodefiles = this.nodefiles || [];
+        this.edgefiles = this.edgefiles || [];
+
+        // Process node files if they exist
         this.nodes = await Promise.all(this.nodefiles.map((node) => new Promise((resolve) => {
             this.createNodeLabel(node.originalname);
             this.readData(node.buffer.toString('utf8'), node.originalname, resolve);
         })));
+
         this.nodes.forEach((nodeFile)=>{
             nodeFile.data.forEach((n)=>{
                 this.createNode(n, nodeFile.type);
             });
         });
+
+        // Process edge files if they exist
         this.edges = await Promise.all(this.edgefiles.map((edge) => new Promise((resolve) => {
             this.createEdgeLabel(edge.originalname);
             this.readData(edge.buffer.toString('utf8'), edge.originalname, resolve);
@@ -112,8 +120,8 @@ class GraphCreator {
                 this.createEdge(e, edgeFile.type);
             });
         });
+
         return this.query;
-        
     }
 };
 

@@ -21,7 +21,9 @@ module.exports = {
     apps: [{
         name: "ag-viewer",
         namespace: "ag-viewer",
-        script: "cd backend && node ./build/bin/www",
+        script: "node",
+        args: "www.js",
+        cwd: "./backend/build/bin/",
         watch: false,
         env: {
             name: "ag-viewer-develop",
